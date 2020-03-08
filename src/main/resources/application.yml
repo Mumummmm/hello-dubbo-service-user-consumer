@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: hello-dubbo-service-user-consumer
+server:
+  port: 9091
+
+user:
+  service:
+    version: 1.0.0
+dubbo:
+  scan:
+    base-packages: com.spike.hello.dubbo.service.user.consumer.controller
+  application:
+    id: hello-dubbo-service-user-consumer
+    name: hello-dubbo-service-user-consumer
+  registry:
+    id: zookeeper
+    address: zookeeper://192.168.2.129:2181?backup=192.168.2.129:2182,192.168.2.129:2183
+  protocol:
+    id: dubbo
+    name: dubbo
+    serialization: kyro
+# Dubbo Endpoint (default status is disable)
+endpoints:
+  dubbo:
+    enabled: true
+
+management:
+  server:
+    port: 9091
+  # Dubbo Health
+  health:
+    dubbo:
+      status:
+        ## StatusChecker Name defaults (default : "memory", "load" )
+        defaults: memory
+  # Enables Dubbo All Endpoints
+  endpoint:
+    dubbo:
+      enabled: true
+    dubbo-shutdown:
+      enabled: true
+    dubbo-configs:
+      enabled: true
+    dubbo-services:
+      enabled: true
+    dubbo-references:
+      enabled: true
+    dubbo-properties:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
